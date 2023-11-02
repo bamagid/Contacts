@@ -13,7 +13,7 @@ $list=explode(",",$_SESSION['id']);
 </head>
 <body>
 <form action="update_contact.php" method="POST">
-                <h2>Ajouter un contact</h2>
+                <h2>Modifier un contact</h2>
                 <label for="Prenom">Prenom:</label><br>
                 <input type="text" name="Prenom" value="<?php echo $list[1];?>"><br>
                 <label for="Nom">Nom:</label><br>

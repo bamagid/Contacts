@@ -90,7 +90,7 @@ class Contacts extends Database{
         'nom'=>$nom,
         'telephone'=>$telephone,
        ]);
-        echo '<p style="color: green; text-align:center;"><b>Bravo votre inscription a reussie!</b></p>';
+        echo '<p style="color: green; text-align:center;"><b>Bravo votre Modification  a reussie!</b></p>';
         }}
         function Delete_Contact($contact_id){
             $delete=self::$conn->prepare("UPDATE contacts SET is_deleted='yes' WHERE id = :id");
