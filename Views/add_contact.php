@@ -18,8 +18,8 @@ require_once("../Controller/traitement_contact.php");
                 <input type="text" name="Nom"><br>
                 <label for="Telephone">Téléphone:</label><br>
                 <input type="tel" name="telephone"><br>
-                <label for="Favoris">Favoris:</label><br>
-                <select name="Favoris">
+                <label for="favori">Favoris:</label><br>
+                <select name="favori">
                     <option value="yes">OUI</option>
                     <option value="no">NON</option>
                 </select><br>

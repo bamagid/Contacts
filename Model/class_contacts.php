@@ -14,7 +14,7 @@ class Contacts extends Database{
         $_SESSION['contacts']=[];
     }
         // Exécution la requête SQL pour récupérer les contacts qui ne sont pas dans les favoris.
-        $sql = "SELECT * FROM  vuecontacts WHERE id_user=:id";
+        $sql = "SELECT * FROM vuecontacts WHERE id_user = :id ORDER BY Prenom ASC";
         $result = self::$conn->prepare($sql);
         $result->execute([
             'id'=>$_SESSION['user']['id']
@@ -25,19 +25,16 @@ class Contacts extends Database{
         if ($result->rowCount() > 0) {
             // Convertir le résultat en un tableau d'objets ou de tableaux associatifs selon vos besoins.
                 $contactsList=$result->fetchAll(PDO::FETCH_ASSOC);
-                $_SESSION['contacts']=$contactsList;
-                return $contactsList;
         }
-        
-        
-    
+        $_SESSION['contacts']=$contactsList;
+        return $contactsList;
  }
  function List_Favoris(){ 
     if (!isset($_SESSION['Favoris'])) {
         $_SESSION['Favoris']=[];
     }
     // Exécutez la requête SQL pour récupérer les contacts qui ne sont pas dans les favoris.
-    $sql = "SELECT * FROM  vuefavoris WHERE id_user = :id";
+    $sql = "SELECT * FROM  vuefavoris WHERE id_user = :id ORDER BY Prenom ASC";
 
     $resultat = self::$conn->prepare($sql);
     $resultat->execute([
@@ -49,23 +46,24 @@ class Contacts extends Database{
     if ($resultat->rowCount() > 0) {
         // Convertir le résultat en un tableau d'objets ou de tableaux associatifs selon vos besoins.
             $Favoris_list=$resultat->fetchAll(PDO::FETCH_ASSOC);
-            $_SESSION['Favoris']=$Favoris_list;
+            // $_SESSION['Favoris']=$Favoris_list;
     }
+    $_SESSION['Favoris']=$Favoris_list;
 
     return $Favoris_list;
 }
  function Add_contact($prenom,$nom, $telephone,$favoris,$id_user){
-    if (!preg_match("/^[a-zA-Z -]{2,70}$/", $prenom)) {
+    if (!preg_match("/^[a-zA-Z][a-zA-Z -]{2,70}$/", $prenom)) {
         echo "Veuillez entrer un prénom valide";
-    } elseif (!preg_match("/^[a-zA-Z]{2,30}$/", $nom)) {
+    } elseif (!preg_match("/^[a-zA-Z][a-zA-Z]{2,30}$/", $nom)) {
         echo "Veuillez entrer un nom valide";
     } elseif (!preg_match("/^7[05768]{1}+[0-9]{7}$/", $telephone)) {
         echo "Le numéro de téléphone est invalide";
-    } elseif (!in_array($favoris, ['yes', 'no'])) {
+    } elseif (!in_array($favoris, ['yes','no'])) {
         echo "Veuillez choisir favoris ou non favoris";
     } else {
         // Exécutez la requête SQL d'insertion pour ajouter le contact.
-        $insert =self::$conn->prepare("INSERT INTO contacts (Prenom, Nom, Telephone, Favoris,id_user) VALUES (:prenom, :nom, :telephone, :favoris,:id_user )");
+        $insert =self::$conn->prepare("INSERT INTO contacts (Prenom, Nom, Telephone,Favoris,id_user) VALUES (:prenom, :nom, :telephone, :favoris,:id_user )");
         $insert->execute([
             'prenom' => $prenom,
             'nom' => $nom,
@@ -100,9 +98,14 @@ class Contacts extends Database{
                 'id'=>$contact_id
             ]);}
         function  Marquer_favoris($contact_id)  {
-            $delete=self::$conn->prepare("UPDATE contacts SET Favoris='yes' WHERE id = :id");
-            $delete->execute([
+            $favoris=self::$conn->prepare("UPDATE contacts SET Favoris='yes' WHERE id = :id");
+            $favoris->execute([
                 'id'=>$contact_id
             ]);}
-        
+            function supprimer_Favoris($contact_id){
+            $favoris_no=self::$conn->prepare("UPDATE contacts SET Favoris='no' WHERE id = :id");
+            $favoris_no->execute([
+                'id'=>$contact_id
+            ]);
+            } 
 }

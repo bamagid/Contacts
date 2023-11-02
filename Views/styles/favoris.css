@@ -1,3 +1,4 @@
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
@@ -9,7 +10,7 @@ body {
     background-color: #007bff;
     color: #fff;
     text-align: center;
-    padding: 20px;
+    padding: 5px;
 }
 
 h1 {
@@ -17,7 +18,13 @@ h1 {
 }
 
 .taches {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     margin: 20px;
+    padding: 0px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row
 }
 
 .color {
@@ -27,7 +34,8 @@ h1 {
     padding: 20px;
 }
 
-p1, p2 {
+.p1,
+.p2 {
     font-weight: bold;
 }
 
@@ -35,16 +43,13 @@ p1, p2 {
     margin-top: 10px;
 }
 
-button1 {
-    background-color: #007bff;
+.button1 {
+    background-color: red;
     color: #fff;
     border: none;
+    margin-top: 6px;
     padding: 10px 20px;
     cursor: pointer;
-}
-
-button1:hover {
-    background-color: #0056b3;
 }
 
 a {

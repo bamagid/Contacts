@@ -22,8 +22,9 @@ $contactsList=$_SESSION['contacts'];
     <form action="contacts.php" class="form" method="post">
         <button type="submit" class="button" name="deconnect" >Se deconnecter</button>
         <a href="favoris.php">Voir mes contacts favoris</a>
-        </form>
         <a href="add_contact.php">Ajouter un contact</a>
+        </form>
+        
     
     <?php
         if(!empty($contactsList)){
@@ -33,10 +34,10 @@ $contactsList=$_SESSION['contacts'];
             <p class="p1"><b>'.$list['Prenom'].'</b></p>
             <p class="p2"><b>'. $list['Nom'].'</b></p>
             <p class="Telephone">'.$list['Telephone'].'</p>
-            <form action="contacts.php" method="POST">
+            <form action="contacts.php" class="form1" method="POST">
             <button type="submit" class="button1" name="Favoris" value="'.$list['id'].'">Marquer comme favoris</button>
             <button type="submit" class="button2" name="delete" value="'.$list['id'].'"> Supprimer la contacts </button>
-            <button  class="button3" name="update" value="'.$list['id'].'">Modifier le contact</button>
+            <button  class="button3" name="update" value="'.implode(",",$list).'">Modifier le contact</button>
             </form>
     </div>';
 }

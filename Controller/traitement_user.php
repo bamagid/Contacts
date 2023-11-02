@@ -1,6 +1,5 @@
 <?php
 require_once("../Model/class_user.php");
-require_once("../Model/class_database.php");
 if(isset($_POST['signup'])){
     $nom = htmlspecialchars($_POST['pseudo1']);
     $email = htmlspecialchars($_POST['email1']);
