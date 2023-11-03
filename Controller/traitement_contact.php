@@ -19,6 +19,8 @@ if (isset($_SESSION['user'])) {
     $contact= new Contacts();
     $contact->List_contact();
     $contact->List_Favoris();
+}else {
+    header("Location:../Views/form.php");
 }
 if (isset($_POST['update'])) {
     session_start();
@@ -33,21 +35,25 @@ if (isset($_POST['modifier_contacts'])) {
     $telephone=htmlspecialchars($_POST['Telephone']);
     $contact= new Contacts();
     $contact->Update_contact($contact_id,$prenom,$nom,$telephone);
+    header("Location:../Views/contacts.php");
 }
 if (isset($_POST['delete'])) {
     $contact_id=$_POST['delete'];
     $contact= new Contacts();
     $contact->Delete_contact($contact_id);
+    header("Location:../Views/contacts.php");
     
 }
 if (isset($_POST['Favoris'])) {
     $contact_id=$_POST['Favoris'];
     $contact= new Contacts();
     $contact->marquer_favoris($contact_id);
+    header("Location:../Views/contacts.php");
 }
 if (isset($_POST['undo'])) {
     $contact_id=$_POST['undo'];
     $contact= new Contacts();
     $contact->supprimer_Favoris($contact_id);
+    header("Location:../Views/favoris.php");
 }
 
